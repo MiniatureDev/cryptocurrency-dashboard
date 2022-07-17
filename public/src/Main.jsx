@@ -23,7 +23,6 @@ function Main() {
         </button>
       </div>
           {choice=="dashboard"?<Dashboard/>:<h1>chart</h1>}
-        {/* <Dashboard/> */}
     </div>
   )
 }
