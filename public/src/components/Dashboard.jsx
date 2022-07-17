@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Coin from './Coin';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { changeLimit } from "../Globals";
 
-function Dashboard() {
-    const [limit, setLimit] = useState(10)
-    const [coins, setCoins] = useState([]);
+function Dashboard(props) {
 
-    async function getCoins() {
-        await fetch(`https://api.coinstats.app/public/v1/coins?skip=0&limit=${limit}`)
-        .then(res=>res.json()).then(data=>setCoins(data.coins))
-        .catch(err=>console.error(err))
-    }
-
-    useEffect(()=>{
-        getCoins()
-    }, [limit])
+    const dispatch = useDispatch();
+    const limit = useSelector((state)=>state.limit.value);
 
   return (
     <div className='container py-5'>
@@ -26,13 +20,13 @@ function Dashboard() {
                 min="0"
                 max="100"
                 onChange={(e)=>{
-                    setLimit(e.target.value)
+                    dispatch(changeLimit(e.target.value))
                 }}
                 />
             </div>
         </div>
         <div className='container-fluid row'>
-            {coins.map(coin=>{
+            {props.coins.map(coin=>{
                 return(
                     <Coin
                         rank={coin.rank}
