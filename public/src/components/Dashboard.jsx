@@ -16,7 +16,7 @@ function Dashboard() {
     }, [limit])
 
   return (
-    <div className='container'>
+    <div className='container py-5'>
         <div className='row'>
             <div className='col-md-8'></div>
             <div className='col-md'>
